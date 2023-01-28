@@ -14,15 +14,12 @@ const sliceResult = createSlice({
     saveResult(_state, { payload }: PayloadAction<IResultSearch>) {
       return { ...payload };
     },
-    clearResult() {
-      return initialState;
-    },
   },
 });
 
 export default sliceResult.reducer;
 
-export const { saveResult, clearResult } = sliceResult.actions;
+export const { saveResult } = sliceResult.actions;
 export const useDataResult = (state: any) => {
   return state.resultData as IResultSearch;
 };

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import { useDataResult } from "../../redux/sliceResult";
+import { useDataResult } from "../../../../redux/sliceResult";
 import { ResultContainer } from "./style";
 
 export const ListSearchResult = () => {

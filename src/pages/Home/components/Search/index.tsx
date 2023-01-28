@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { gitHubApi } from "../../services/GitHubAPI";
-import { saveResult } from "../../redux/sliceResult";
+import { gitHubApi } from "../../../../services/GitHubAPI";
+import { saveResult } from "../../../../redux/sliceResult";
 import { InputContainer } from "./style";
 
 export const Search = () => {
@@ -26,7 +26,9 @@ export const Search = () => {
         id="input-search"
         onChange={(e) => setUserName(e.target.value)}
       />
-      <button onClick={searchUser}>Go</button>
+      <button type="submit" onClick={searchUser}>
+        Go
+      </button>
     </InputContainer>
   );
 };
