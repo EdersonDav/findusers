@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 import { gitHubApi } from '../../services/GitHubAPI';
 
-import { saveRepos } from '../../redux/sliceRepos';
 import { saveUser } from '../../redux/sliceUser';
 
 import { UserDetail } from './components/UserDetail';
@@ -20,14 +19,6 @@ export const Detail = () => {
       gitHubApi.getUser(user).then((resp) => {
         if (resp) {
           dispatch(saveUser(resp));
-        }
-      });
-
-      gitHubApi.getRepos(user).then((resp) => {
-        if (resp) {
-          console.log(resp.length);
-
-          dispatch(saveRepos(resp));
         }
       });
     }

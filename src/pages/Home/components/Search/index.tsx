@@ -1,19 +1,18 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../../redux/hooks';
 
-import { gitHubApi } from "../../../../services/GitHubAPI";
-import { saveResult } from "../../../../redux/sliceResult";
-import { InputContainer } from "./style";
+import { fetchSearchUser } from '../../../../redux/sliceSearchUsers';
+import { saveName, useDataName } from '../../../../redux/sliceNameSearch';
+import { InputContainer } from './style';
 
 export const Search = () => {
-  const [userName, setUserName] = useState("");
   const dispatch = useDispatch();
+  const appDispatch = useAppDispatch();
+  const userName = useSelector(useDataName);
 
   const searchUser = async () => {
     if (userName) {
-      const results = await gitHubApi.searchUsers(userName);
-
-      dispatch(saveResult(results));
+      appDispatch(fetchSearchUser({ userName, page: 1 }));
     }
   };
 
@@ -24,7 +23,7 @@ export const Search = () => {
         value={userName}
         type="text"
         id="input-search"
-        onChange={(e) => setUserName(e.target.value)}
+        onChange={({ target: { value } }) => dispatch(saveName(value))}
       />
       <button type="submit" onClick={searchUser}>
         Go

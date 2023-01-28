@@ -1,38 +1,55 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { RootState } from './store';
+import { gitHubApi } from '../services/GitHubAPI';
 import { IRepos } from '../types/interfaces';
 
-const initialState = [] as IRepos[];
+interface IFetchResults {
+  repos: IRepos[];
+  loading: boolean;
+  error: boolean;
+}
+
+const initialState: IFetchResults = {
+  repos: [],
+  loading: false,
+  error: false,
+};
+
+interface IGetUserParams {
+  userName: string;
+  page: number;
+}
+
+export const fetchRepos = createAsyncThunk(
+  'user/getRepositories',
+  async ({ userName, page }: IGetUserParams) => {
+    const response = await gitHubApi.getRepos(userName, page);
+    return response;
+  },
+);
 
 const sliceRepos = createSlice({
-  name: 'result',
+  name: 'reposFetch',
   initialState,
-  reducers: {
-    saveRepos(_state, { payload }: PayloadAction<IRepos[]>) {
-      return [...payload];
-    },
+  extraReducers: (builder) => {
+    builder.addCase(fetchRepos.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchRepos.fulfilled, (state, action) => {
+      state.loading = false;
+      state.repos = action.payload;
+      state.error = false;
+    });
+    builder.addCase(fetchRepos.rejected, (state) => {
+      state.error = true;
+    });
   },
+  reducers: {},
 });
 
 export default sliceRepos.reducer;
 
-export const { saveRepos } = sliceRepos.actions;
-
-export const useDataRepos = (state: any) => {
-  return state.reposData as IRepos[];
-};
-
-export const useDataReposPagination = (state: any, page: number) => {
-  const repos = state.reposData as IRepos[];
-  const data = repos.slice(page - 1, 10);
-  return data;
-};
-
-export const useCountRepos = (state: any): string[] => {
-  const repos = state.reposData as IRepos[];
-  const numbers = Object.keys(
-    new Array(Math.ceil(repos.length / 10)).fill(null),
-  );
-
-  return numbers;
+export const useDataRepositories = (state: RootState) => {
+  return state.reposData.repos;
 };
