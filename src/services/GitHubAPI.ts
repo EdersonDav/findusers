@@ -14,9 +14,9 @@ class GitHubAPI {
     return `Error in ${message} => ${err.message}`;
   }
 
-  public async searchUsers(name: string, page = 1): Promise<IResultSearch> {
+  public async searchUsers(name: string, page: number): Promise<IResultSearch> {
     try {
-      const usersResponse = await this.api.get(`search/users?q=${name}&page=${page}`);
+      const usersResponse = await this.api.get(`search/users?q=${name}&page=${page}&per_page=10`);
       if (usersResponse.status != 200) {
         return { users: [], count: 0 }
       }
@@ -50,9 +50,9 @@ class GitHubAPI {
 
   }
 
-  public async getRepos(userName: string): Promise<IRepos[]> {
+  public async getRepos(userName: string, page: number): Promise<IRepos[]> {
     try {
-      const userResponse = await this.api.get(`/users/${userName}/repos`);
+      const userResponse = await this.api.get(`/users/${userName}/repos?page=${page}&per_page=10`);
       if (userResponse.status != 200) {
         return [];
       }
