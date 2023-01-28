@@ -9,39 +9,63 @@ class GitHubAPI {
     this.api = axios.create({ baseURL: this.baseURL })
   }
 
+  private errorFormated(error: unknown, message: string) {
+    const err = error as Error;
+    return `Error in ${message} => ${err.message}`;
+  }
+
   public async searchUsers(name: string, page = 1): Promise<IResultSearch> {
-    const usersResponse = await this.api.get(`search/users?q=${name}&page=${page}`);
-    if (usersResponse.status != 200) {
+    try {
+      const usersResponse = await this.api.get(`search/users?q=${name}&page=${page}`);
+      if (usersResponse.status != 200) {
+        return { users: [], count: 0 }
+      }
+
+      const data: ISearchUserResponse = usersResponse.data;
+
+      const { items: users, total_count: count } = data;
+
+      return { users, count };
+    } catch (error) {
+      console.error(this.errorFormated(error, 'search users'));
       return { users: [], count: 0 }
     }
 
-    const data: ISearchUserResponse = usersResponse.data;
-
-    const { items: users, total_count: count } = data;
-
-    return { users, count };
   }
 
   public async getUser(userName: string): Promise<IUser | null> {
-    const userResponse = await this.api.get(`/users/${userName}`);
-    if (userResponse.status != 200) {
+    try {
+      const userResponse = await this.api.get(`/users/${userName}`);
+      if (userResponse.status != 200) {
+        return null;
+      }
+
+      const user: IUser = userResponse.data;
+
+      return user;
+    } catch (error) {
+      console.error(this.errorFormated(error, 'get user'));
       return null;
     }
 
-    const user: IUser = userResponse.data;
-
-    return user;
   }
 
   public async getRepos(userName: string): Promise<IRepos[]> {
-    const userResponse = await this.api.get(`/users/${userName}/repos`);
-    if (userResponse.status != 200) {
+    try {
+      const userResponse = await this.api.get(`/users/${userName}/repos`);
+      if (userResponse.status != 200) {
+        return [];
+      }
+
+      const repos: IRepos[] = userResponse.data;
+
+      return repos;
+
+    } catch (error) {
+      console.error(this.errorFormated(error, 'get repositories'));
       return [];
     }
 
-    const repos: IRepos[] = userResponse.data;
-
-    return repos;
   }
 
 }
