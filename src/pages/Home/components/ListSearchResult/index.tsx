@@ -9,13 +9,20 @@ import {
   useCountResult,
 } from '../../../../redux/sliceSearchUsers';
 
-import { ResultContainer } from './style';
+import {
+  ResultContainer,
+  UsersCard,
+  UserImage,
+  Container,
+  PaginationResults,
+} from './style';
 
 export const ListSearchResult = () => {
   const [page, setPage] = useState(1);
   const dispatch = useAppDispatch();
   const users = useSelector(useDataResult);
   const userName = useSelector(useDataName);
+  const countUsers = useSelector(useCountResult);
 
   useEffect(() => {
     if (userName) {
@@ -24,20 +31,24 @@ export const ListSearchResult = () => {
   }, [page]);
 
   return (
-    <ResultContainer>
-      {users.map((user) => (
-        <div key={user.id}>
-          <h1>{user.login}</h1>
-          <a href={`/${user.login}`}>ver detalhes</a>
-        </div>
-      ))}
-      <div>
-        {useSelector(useCountResult).map((page) => (
-          <button key={page} onClick={() => setPage(Number(page))}>
-            {page}
-          </button>
+    <Container>
+      {countUsers.total > 0 && <p>{countUsers.total} Users</p>}
+      <ResultContainer>
+        {users.map((user) => (
+          <UsersCard href={`/${user.login}`} key={user.id}>
+            <UserImage>
+              <img src={user.avatar_url} alt={`Photo user ${user.login}`} />
+            </UserImage>
+            <h1>{user.login}</h1>
+          </UsersCard>
         ))}
-      </div>
-    </ResultContainer>
+      </ResultContainer>
+      <PaginationResults
+        current={page}
+        total={countUsers.total}
+        onPageChange={setPage}
+        maxWidth={100}
+      />
+    </Container>
   );
 };
