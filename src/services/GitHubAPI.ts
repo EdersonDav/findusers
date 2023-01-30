@@ -16,7 +16,7 @@ class GitHubAPI {
 
   public async searchUsers(name: string, page: number): Promise<IResultSearch> {
     try {
-      const usersResponse = await this.api.get(`search/users?q=${name}&page=${page}&per_page=10`);
+      const usersResponse = await this.api.get(`search/users?q=${name}&page=${page}`);
       if (usersResponse.status != 200) {
         return { users: [], count: 0 }
       }

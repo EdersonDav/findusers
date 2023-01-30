@@ -2,36 +2,35 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   :root{
-    --background: #212121;
+    --background: #f6f8fa;
+    --green: #2c974b;
+    --blue:#157cf2;
+    --red:#ff303c;
+    --txt-1:#2a292f;
+    --txt-2:#767373;
+    --txt-3:#24292f;
+    --txt-4:#fff;
+    --txt-5:#F8F8F8;
+    --txt-6:#eee;
+    --shape-black:#212121;
+    --shape-white:#fff;
+    --gray:#d8d8d8;
+    --gray-black: #2d2f33;
+  }
+  /* --background: #212121;
     --purple: #7b66fb;
     --green: #00e0b8;
     --blue:#1ea1ef;
     --red:#ff303c;
-    --orange:#ff7d43;
     --txt-1:#fff;
     --txt-2:#F8F8F8;
     --txt-3:#eee;
     --shape:#fff;
     --gray:#d8d8d8;
-    --gray-black: #2d2f33;
-  }
-  /* --background #F8F8F8 */
-  /* --txt-2: #4B4B4B */
-  /*--txt-1: #212121; */
+    --gray-black: #2d2f33; */
   html{
     background: var(--background);
-    padding: 0 5%;
-    &::-webkit-scrollbar-track {
-      background-color: var(--green);
-    }
-    &::-webkit-scrollbar {
-      width: 6px;
-      background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--shape);
-      border-radius: 50px;
-    }
+    padding: 5%;
   }
 
   *{
@@ -43,7 +42,7 @@ export default createGlobalStyle`
     font-family: "Roboto", sans-serif;
   }
   section{
-    margin-bottom: 200px;
+    margin-bottom: 50px;
   }
   
   button{
@@ -56,6 +55,10 @@ export default createGlobalStyle`
 
   h2{
     font-weight: 500;
+  }
+
+  p, span, button{
+    font-size: 18px;
   }
 
   ul{
@@ -78,5 +81,12 @@ export default createGlobalStyle`
     @media(max-width: 1220px){
       width: 100%;
     }
+  }
+  input, button{
+    border: 1px solid transparent;
+  }
+
+  input::placeholder{
+    color: var(--txt-2)
   }
 `

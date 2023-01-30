@@ -60,7 +60,9 @@ export const useDataResult = (state: RootState) => {
   return state.searchUsers.data.users as IUsersResult[];
 };
 
-export const useCountResult = (state: RootState): string[] => {
+export const useCountResult = (
+  state: RootState,
+): { arrayPages: string[]; total: number } => {
   const count = state.searchUsers.data.count;
-  return returnArrayPages(count);
+  return { arrayPages: returnArrayPages(count, 30), total: count };
 };
