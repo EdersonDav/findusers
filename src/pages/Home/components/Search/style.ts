@@ -24,6 +24,10 @@ export const FormSearch = styled.form`
     opacity: 0;
     position: absolute;
   }
+
+  @media(max-width: 690px){
+    width: 100%;
+  }
 `
 
 export const InputSearch = styled.input`

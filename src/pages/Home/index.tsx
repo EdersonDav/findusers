@@ -5,7 +5,7 @@ import { ListSearchResult } from './components/ListSearchResult';
 
 export const Home = () => {
   return (
-    <Container>
+    <Container className="wrapper">
       <Search />
       <ListSearchResult />
     </Container>

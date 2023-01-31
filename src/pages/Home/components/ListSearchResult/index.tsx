@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Pagination } from '../../../../components/Pagination';
 
 import { useAppDispatch } from '../../../../redux/hooks';
 import { useDataName } from '../../../../redux/sliceNameSearch';
@@ -9,13 +10,7 @@ import {
   useCountResult,
 } from '../../../../redux/sliceSearchUsers';
 
-import {
-  ResultContainer,
-  UsersCard,
-  UserImage,
-  Container,
-  PaginationResults,
-} from './style';
+import { ResultContainer, UsersCard, UserImage, Container } from './style';
 
 export const ListSearchResult = () => {
   const [page, setPage] = useState(1);
@@ -43,11 +38,10 @@ export const ListSearchResult = () => {
           </UsersCard>
         ))}
       </ResultContainer>
-      <PaginationResults
+      <Pagination
         current={page}
         total={countUsers.total}
         onPageChange={setPage}
-        maxWidth={100}
       />
     </Container>
   );

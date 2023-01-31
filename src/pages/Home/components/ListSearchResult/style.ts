@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import Pagination from 'react-responsive-pagination';
-
 export const Container = styled.section`
   display: flex;
   flex-direction: column;
@@ -48,8 +46,4 @@ export const UserImage = styled.div`
     vertical-align: middle;
     height: 100%;
   }
-`
-
-export const PaginationResults = styled(Pagination)`
-  display: flex;
 `
