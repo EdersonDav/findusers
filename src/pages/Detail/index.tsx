@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { TbArrowBackUp } from 'react-icons/tb';
 
 import { gitHubApi } from '../../services/GitHubAPI';
 
@@ -25,10 +26,11 @@ export const Detail = () => {
   }, [user]);
 
   return (
-    <Container>
-      <h1>Detail</h1>
-      <h2>{user}</h2>
-      <a href="/">back</a>
+    <Container className="wrapper">
+      <a href="/">
+        <TbArrowBackUp />
+        Back to search
+      </a>
       <UserDetail />
       <Repositories />
     </Container>

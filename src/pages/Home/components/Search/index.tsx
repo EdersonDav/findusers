@@ -27,7 +27,7 @@ export const Search = () => {
           value={userName}
           type="text"
           id="input-search"
-          placeholder="Search User"
+          placeholder="Search GitHub User"
           onChange={({ target: { value } }) => dispatch(saveName(value))}
           autoComplete="off"
         />
