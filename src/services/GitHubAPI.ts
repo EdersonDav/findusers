@@ -2,14 +2,15 @@ import axios from 'axios';
 
 import { ISearchUserResponse, IResultSearch, IUser, IRepos } from '../types/interfaces';
 interface ICacheUserSearch {
-  [key: string]: IResultSearch[];
+  [key: string]: IResultSearch;
 }
 
 
 class GitHubAPI {
   private api;
   private baseURL = 'https://api.github.com/';
-  private cacheUserSearch: ICacheUserSearch[] = [];
+  private cacheUserSearch: ICacheUserSearch = {};
+  private internPage = 1;
 
   constructor() {
     this.api = axios.create({ baseURL: this.baseURL })
@@ -20,9 +21,34 @@ class GitHubAPI {
     return `Error in ${message} => ${err.message}`;
   }
 
+  private getUrl(name: string, page: number) {
+    return `search/users?q=${name}&page=${page}`
+  }
+
+  private setCache(results: IResultSearch, name: string): void {
+    const count = results.count;
+    const resultCount = results.users.length;
+    const perPage = Math.ceil(resultCount / 20);
+    let countSlice = 0;
+
+    let index = Object.keys(this.cacheUserSearch).length;
+
+    for (index; index < perPage + index; index++) {
+      const sliceNumber = countSlice === 0 ? 0 : countSlice * 20;
+      this.cacheUserSearch[this.getUrl(name, index + 1)] = {
+        count,
+        users: results.users.slice(sliceNumber, 20),
+      }
+      countSlice++
+    }
+  }
+
+  // private getCache() { }
+
   public async searchUsers(name: string, page: number): Promise<IResultSearch> {
     try {
-      const usersResponse = await this.api.get(`search/users?q=${name}&page=${page}`);
+      //limit 30
+      const usersResponse = await this.api.get(`${this.getUrl(name, this.internPage)}&per_page=100`);
       if (usersResponse.status != 200) {
         return { users: [], count: 0 }
       }
