@@ -18,8 +18,8 @@
 
 # 🚀 Recursos
 
-<> Pesquisa de usuários no gitHub
-<> Vizualização dos repositórios
+- Pesquisa de usuários no gitHub
+- Vizualização dos repositórios
 
 # 👷🏿 Instalação
 
