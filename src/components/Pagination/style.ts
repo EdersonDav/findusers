@@ -4,6 +4,8 @@ import Pagination from 'react-responsive-pagination';
 export const PaginationResults = styled(Pagination)`
   display: inline-flex;
   gap: 10px;
+  width: 100%;
+  justify-content: center;
   @media(max-width: 690px){
     gap: 0px;
     font-size: 14px;

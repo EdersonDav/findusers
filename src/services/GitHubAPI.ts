@@ -1,10 +1,16 @@
 import axios from 'axios';
 
 import { ISearchUserResponse, IResultSearch, IUser, IRepos } from '../types/interfaces';
+interface ICacheUserSearch {
+  [key: string]: IResultSearch[];
+}
+
 
 class GitHubAPI {
   private api;
-  private baseURL = 'https://api.github.com/'
+  private baseURL = 'https://api.github.com/';
+  private cacheUserSearch: ICacheUserSearch[] = [];
+
   constructor() {
     this.api = axios.create({ baseURL: this.baseURL })
   }

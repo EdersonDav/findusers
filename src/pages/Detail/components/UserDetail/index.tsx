@@ -19,40 +19,40 @@ export const UserDetail = () => {
         />
         <h1>{userData.name}</h1>
       </Avatar>
-      <p className="bio">{userData.bio}</p>
+      <p>{userData.bio}</p>
       <div className="infos">
         {userData?.company && (
-          <p>
+          <span>
             <GiFactory />
             {userData.company}
-          </p>
+          </span>
         )}
 
         {userData.location && (
-          <p>
+          <span>
             <MdOutlineLocationOn />
             {userData.location}
-          </p>
+          </span>
         )}
 
         {userData.blog && (
-          <p>
+          <span>
             <HiWifi />
             {userData.blog}
-          </p>
+          </span>
         )}
 
         {userData.email && (
-          <p>
+          <span>
             <AiOutlineMail />
             {userData.email}
-          </p>
+          </span>
         )}
       </div>
 
-      <p className="repos">
+      <strong>
         <RiGitRepositoryLine /> {userData.public_repos} public repositories
-      </p>
+      </strong>
     </UserContainer>
   );
 };

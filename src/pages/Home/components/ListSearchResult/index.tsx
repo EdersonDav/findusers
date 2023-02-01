@@ -25,6 +25,10 @@ export const ListSearchResult = () => {
     }
   }, [page]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [countUsers.total]);
+
   return (
     <Container>
       {countUsers.total > 0 && <p>{countUsers.total} Users</p>}
@@ -40,7 +44,7 @@ export const ListSearchResult = () => {
       </ResultContainer>
       <Pagination
         current={page}
-        total={countUsers.total}
+        total={countUsers.perpage}
         onPageChange={setPage}
       />
     </Container>

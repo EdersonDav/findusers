@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { gitHubApi } from '../services/GitHubAPI';
 import { IResultSearch, IUsersResult } from '../types/interfaces';
-import { returnArrayPages } from '../helpers/returnArrayPages';
 
 interface IFetchResults {
   data: IResultSearch;
@@ -62,7 +61,10 @@ export const useDataResult = (state: RootState) => {
 
 export const useCountResult = (
   state: RootState,
-): { arrayPages: string[]; total: number } => {
+): { perpage: number; total: number } => {
   const count = state.searchUsers.data.count;
-  return { arrayPages: returnArrayPages(count, 30), total: count };
+  return {
+    perpage: Math.ceil(count / 30),
+    total: count,
+  };
 };

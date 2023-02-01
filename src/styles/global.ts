@@ -15,19 +15,9 @@ export default createGlobalStyle`
     --shape-black:#212121;
     --shape-white:#fff;
     --gray:#d8d8d8;
+    --gray-light:#d8dee4;
     --gray-black: #2d2f33;
   }
-  /* --background: #212121;
-    --purple: #7b66fb;
-    --green: #00e0b8;
-    --blue:#1ea1ef;
-    --red:#ff303c;
-    --txt-1:#fff;
-    --txt-2:#F8F8F8;
-    --txt-3:#eee;
-    --shape:#fff;
-    --gray:#d8d8d8;
-    --gray-black: #2d2f33; */
   html{
     background: var(--background);
     padding: 5%;
