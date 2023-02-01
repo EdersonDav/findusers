@@ -4,8 +4,8 @@
 
 # 📌 Índice
 
-- [Recursos](#-recursos)
 - [Descrição](#-descrição)
+- [Recursos](#-recursos)
 - [Instalação](#-instalação)
 - [Começando](#-começando)
 - [Tecnologias Usadas](#-tecnologias-usadas)
