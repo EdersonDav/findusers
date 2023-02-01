@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { GiFactory } from 'react-icons/gi';
 import { MdOutlineLocationOn } from 'react-icons/md';
-import { HiWifi } from 'react-icons/hi';
+import { HiWifi, HiOutlineExternalLink } from 'react-icons/hi';
 import { AiOutlineMail } from 'react-icons/ai';
 import { RiGitRepositoryLine } from 'react-icons/ri';
 
@@ -17,7 +17,12 @@ export const UserDetail = () => {
           src={userData.avatar_url}
           alt={`Picture user ${useDataUser.name}`}
         />
-        <h1>{userData.name}</h1>
+        <h1>
+          {userData.name}
+          <a href={userData.html_url} target="_blank" rel="noreferrer">
+            <HiOutlineExternalLink />
+          </a>
+        </h1>
       </Avatar>
       <p>{userData.bio}</p>
       <div className="infos">
@@ -48,6 +53,8 @@ export const UserDetail = () => {
             {userData.email}
           </span>
         )}
+        <span>followers: {userData.followers}</span>
+        <span>following: {userData.following}</span>
       </div>
 
       <strong>

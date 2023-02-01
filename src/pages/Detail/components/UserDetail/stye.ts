@@ -27,7 +27,7 @@ export const UserContainer = styled.section`
         font-size: 16px;
       }
     }
-    @media(max-width: 690px){
+    @media(max-width: 1000px){
       flex-direction: column;
       align-items: flex-start;
       span{
@@ -48,7 +48,7 @@ export const UserContainer = styled.section`
       font-size: 20px;
       margin-right: 5px;
     }
-    @media(max-width: 690px){
+    @media(max-width: 1000px){
       justify-content: flex-start ;
     }
   }
@@ -71,5 +71,14 @@ export const Avatar = styled.div`
   }
   h1{
     margin-top: 10px;
+    display: flex;
+    a{
+      margin-left: 10px;
+      color: var(--txt-1);
+      &:visited{
+        color: var(--txt-1);
+      }
+
+    }
   }
 `
